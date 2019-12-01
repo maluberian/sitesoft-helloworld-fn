@@ -21,7 +21,7 @@ paths:
       tags:
       - "hello"
       summary: "Create a new guest entry for a user."
-      description: "Creates a brand-new entry for a guest in the **MGM Resorts International** identity directory."
+      description: "Says hello to you using your name."
       operationId: "createGuest"
       parameters:
         - in: "query"
