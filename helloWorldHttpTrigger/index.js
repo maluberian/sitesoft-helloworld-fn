@@ -2,7 +2,7 @@ module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
     let body = req.body ? JSON.parse(req.body) : {};
-    if ((req.query.firstName && req.query.lastName) || (req.body.firstName && req.body.lastName)) {
+    if ((req.query.firstName && req.query.lastName) || (body.firstName && lastName)) {
         let firstName = req.query.firstName ? req.query.firstName : req.body.firstName;
         let lastName = req.query.lastName ? req.query.lastName : req.body.lastName;
 
