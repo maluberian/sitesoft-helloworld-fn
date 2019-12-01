@@ -1,0 +1,64 @@
+openapi: "3.0.0"
+info:
+  title: "Sitesoft - Hello World"
+  description: "A simple hello-world used for experiementation with Azure Services"
+  version: "1.0.0"
+  termsOfService: "N/A"
+  contact:
+    email: "dustin.clifford@sitesoftllc.net"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+servers:
+  - url: "https://sitesoft-uw-apim-d.azure-api.net"
+    description: "Hello World Service dev"
+tags:
+- name: "hello"
+  description: "Simple Hello World!"
+paths:
+  /hello:
+    get:
+      tags:
+      - "hello"
+      summary: "Create a new guest entry for a user."
+      description: "Creates a brand-new entry for a guest in the **MGM Resorts International** identity directory."
+      operationId: "createGuest"
+      parameters:
+        - in: "query"
+          name: firstName
+          required: false
+          schema:
+            type: string
+        - in: "query"
+          name: lastName
+          required: false
+          schema:
+            type: string
+      responses:
+        201:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  greeting:
+                    type: string
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+        409:
+          description: "Conflict"
+      security:
+        - helloworld-oauth2: [ "guest-write" ]
+components:
+  securitySchemes:
+    helloworld-oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://azdeapi-dev.mgmresorts.com/token
+          scopes:
+            guest-read: "Service is able to read guest information."
+            guest-write: "Service is able to write or otherwise modify guest information."
